@@ -34,6 +34,18 @@ defmodule Procore.Resources.Projects do
   end
 
   @doc """
+  Lists projects.
+  """
+  @spec list(Tesla.Client.t()) :: %ResponseResult{} | %ErrorResult{}
+  def list(client) do
+    %Request{}
+    |> Request.insert_request_type(:get)
+    |> Request.insert_api_version("v1.0")
+    |> Request.insert_endpoint("/projects")
+    |> Procore.send_request(client)
+  end
+
+  @doc """
   Creates a project and all of it's required defaults and associations.
   """
   @spec create(Tesla.Client.t(), map) :: %ResponseResult{} | %ErrorResult{}
